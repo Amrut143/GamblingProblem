@@ -1,31 +1,40 @@
-#!/bin/bash -x
+#!/bin/bash 
 
 #@Author: Amrut
-#Gampling Use Case 2
+#Gambling Use Case 3
 
 STARTING_STAKE=100
 BET=1
 DAY=1
 WIN=0
 LOSS=1
+stake=$STARTING_STAKE
+PercentStake=$(( 50*$STARTING_STAKE/100 ))
+MaxWin=$(( $STARTING_STAKE + $PercentStake ))
+MaxLoss=$(( $STARTING_STAKE - $PercentStake ))
 
 echo "Welcome to Gambling"
 
 function gamble()
 {
-	ran=$(( RANDOM%2 ))
+	while [ $stake -lt $MaxWin ] && [ $stake -gt $MaxLoss ]
+	do
+		ran=$(( RANDOM%2 ))
 
 	if [ $ran -eq 0 ]
 	then
-		STARTING_STAKE=$(( STARTING_STAKE+BET ))
+		stake=$(( stake+BET ))
 		echo "WIN"
+		echo $stake
 	else
-		STARTING_STAKE=$(( STARTING_STAKE-BET ))
+		stake=$(( stake-BET ))
 		echo "LOSS"
+		echo $stake
 	fi
+	done
 }
 
 gamble
 
-echo $STARTING_STAKE
+echo "Gambler reached to 50% and resign for the day"
 
