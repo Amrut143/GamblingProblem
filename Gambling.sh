@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash -x
 
 #@Author: Amrut
 #Gambling Use Case 6
@@ -32,7 +32,7 @@ function gamble()
 	then
 		stake=$(( $stake+$BET ))
 		echo "WIN"
-		echo $stake
+    echo $stake
 	else
 		stake=$(( $stake-$BET ))
 		echo "LOSS"
@@ -40,6 +40,19 @@ function gamble()
 	fi
 	done
 }
+	for (( day=1; day<$numOfDays; day++ ))
+	do
+		gamble
+			if [ $stake -eq $MaxLoss ]
+			then
+				totalWinOrLoss=$(( totalWinOrLoss-50 ))
+			else
+				totalWinOrLoss=$(( totalWinOrLoss+50 ))
+			fi
+		echo "Gambler reached to 50% and resign for the day"
+	done
+echo $totalWinOrLoss
+
 
 	for (( day=1; day<=$numOfDays; day++ ))
 	do
