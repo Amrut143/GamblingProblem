@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash -x
 
 #@Author: Amrut
 #Gambling Use Case 7
@@ -39,7 +39,6 @@ function dailyBet()
 	done
 }
 function monthlyBet() {
-
 	for (( day=1; day<=$numOfDays; day++ ))
 	do
 		dailyBet
