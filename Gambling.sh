@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash -x
 
 #@Author: Amrut
 #Gambling Use Case 4
@@ -8,6 +8,7 @@ BET=1
 DAY=1
 WIN=0
 LOSS=1
+
 PercentStake=$(( 50*$STARTING_STAKE/100 ))
 MaxWin=$(( $STARTING_STAKE + $PercentStake ))
 MaxLoss=$(( $STARTING_STAKE - $PercentStake ))
