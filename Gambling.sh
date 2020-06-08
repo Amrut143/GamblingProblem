@@ -27,13 +27,14 @@ function gamble()
 	then
 		stake=$(( stake+BET ))
 		echo "WIN"
+    echo $stake
 	else
 		stake=$(( stake-BET ))
 		echo "LOSS"
+		echo $stake
 	fi
 	done
 }
-
 	for (( day=1; day<$numOfDays; day++ ))
 	do
 		gamble
@@ -46,3 +47,5 @@ function gamble()
 		echo "Gambler reached to 50% and resign for the day"
 	done
 echo $totalWinOrLoss
+
+echo "Gambler reached to 50% and resign for the day"
