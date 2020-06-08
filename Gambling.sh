@@ -33,7 +33,7 @@ function gamble()
 	done
 }
 
-	for (( day=0; day<$numOfDays; day++ ))
+	for (( day=1; day<$numOfDays; day++ ))
 	do
 		gamble
 			if [ $stake -eq $MaxLoss ]
