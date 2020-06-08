@@ -1,7 +1,8 @@
 #!/bin/bash -x
 
 #@Author: Amrut
-#Gambling Use Case 5
+#Gambling Use Case 6
+
 STARTING_STAKE=100
 BET=1
 DAY=1
@@ -17,7 +18,7 @@ winDays=0
 lossDays=0
 
 declare -A eachDay
-
+declare -A totalWinLossDay
 echo "Welcome to Gambling"
 
 function gamble()
@@ -60,13 +61,30 @@ echo $totalWinOrLoss
 				then
 						totalWinOrLoss=$(( $totalWinOrLoss-$PercentStake ))
 						eachDay["Day $day"]=-$PercentStake
+						totalWinLossDay["Day $day"]=$totalWinOrLoss
 						(( lossDays++ ))
 				else
 						totalWinOrLoss=$(( $totalWinOrLoss+$PercentStake ))
 						eachDay["Day $day"]=$PercentStake
+						totalWinLossDay["Day $day"]=$totalWinOrLoss
 						(( winDays++ ))
 				fi
 	done
 echo "Number of days Win is $winDays by $(($winDays*$PercentStake))" 
 echo "Number of days Loss is $lossDays by  $(($lossDays*$PercentStake))"
 echo "Total amount of Win Or Loss is $totalWinOrLoss"
+echo "${!totalWinLossDay[@]} : ${totalWinLossDay[@]}"
+luckyDay=$( printf "%s\n" ${totalWinLossDay[@]} | sort -nr | head -1 )
+unluckyDay=$( printf "%s\n" ${totalWinLossDay[@]} | sort -nr | tail -1 )
+
+
+	for values in "${!totalWinLossDay[@]}"
+	do
+		if [ ${totalWinLossDay[$values]} -eq $luckyDay ]
+		then
+			echo "Luckiest Day is::" $values
+		elif [ ${totalWinLossDay[$values]} -eq $unluckyDay ]
+		then
+			echo "Unluckiest Day is::" $values
+		fi
+	done
