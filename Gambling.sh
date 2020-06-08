@@ -8,6 +8,7 @@ BET=1
 DAY=1
 WIN=0
 LOSS=1
+stake=$STARTING_STAKE
 PercentStake=$(( 50*$STARTING_STAKE/100 ))
 MaxWin=$(( $STARTING_STAKE + $PercentStake ))
 MaxLoss=$(( $STARTING_STAKE - $PercentStake ))
@@ -16,24 +17,24 @@ echo "Welcome to Gambling"
 
 function gamble()
 {
-	while [ $STARTING_STAKE -lt $MaxWin ] && [ $STARTING_STAKE -gt $MaxLoss ]
+	while [ $stake -lt $MaxWin ] && [ $stake -gt $MaxLoss ]
 	do
 		ran=$(( RANDOM%2 ))
 
 	if [ $ran -eq 0 ]
 	then
-		STARTING_STAKE=$(( STARTING_STAKE+BET ))
+		stake=$(( stake+BET ))
 		echo "WIN"
-		echo $STARTING_STAKE
+		echo $stake
 	else
-		STARTING_STAKE=$(( STARTING_STAKE-BET ))
+		stake=$(( stake-BET ))
 		echo "LOSS"
-		echo $STARTING_STAKE
+		echo $stake
 	fi
 	done
 }
 
 gamble
 
-echo "Gambler reached to required 50% and resign for the day"
+echo "Gambler reached to 50% and resign for the day"
 
