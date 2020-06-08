@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 #@Author: Amrut
-#Gambling Use Case 3
+#Gambling Use Case 5
 
 STARTING_STAKE=100
 BET=1
